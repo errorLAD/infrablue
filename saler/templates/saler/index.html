@@ -1,0 +1,112 @@
+{% extends 'saler/base.html' %}
+{% load static %}
+{% block saler_head %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+<link rel="stylesheet" href="{% static 'saler/css/home_style.css' %}">
+<title>InfraBlue.in</title>
+
+{% endblock saler_head %}
+{% block saler_body %}
+<div class="bg-white">
+	<div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w3-hide-small">
+	
+<div class="columns">
+	<div class="column">
+	    <img src="https://imgur.com/IhcNZ3J.png" width="1002" height="828">
+	</div>
+	<div class="column">
+		<div class="py-36">
+
+			<p class=" mt-2 text-6xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+				Welcome To Factory Owner And Seller
+			</p>
+			<p class="px-2 py-2 mt-2 text-2xl leading-8 font-bold tracking-tight text-indigo-600 sm:text-2xl">
+				Sell online to  Retails And Builders at less Commission
+			</p>
+			<div class="buttons py-4">
+				<button class="button is-link is-rounded is-fullwidth">Add Product</button>
+            </div>
+			<p class=" mt-2 text-sm text-gray-600 sm:text-l">
+			  *Account Verification could take over 24 hours
+			</p>
+	    </div>
+     </div>
+  </div>
+	  </div>
+
+</div>
+
+<!--small screen-->
+<div class="bg-white">
+	<div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w3-hide-large">
+	
+
+	<div class="">
+	    <img src="https://imgur.com/IhcNZ3J.png" width="1002" height="828">
+	</div>
+
+
+			<p class="py-2  text-6xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+				Welcome To 
+			</p><br>
+
+			<p class=" text-6xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+			Factory 
+			</p><br>
+        	<p class="py-2  text-6xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+			Owner And
+				</p><br>
+				<p class="py-2  text-6xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+				 Selller
+					</p>
+			<p class="px-2 py-2 mt-2 text-2xl leading-8 font-bold tracking-tight text-indigo-600 sm:text-2xl">
+				Sell online to  Retails And Builder at less Commission
+			</p>
+			<div class="buttons py-4">
+				<button class="button is-link is-rounded is-fullwidth">Add Product</button>
+            </div>
+
+  </div>
+	  </div>
+
+</div>
+
+
+	{% endblock saler_body %}
+
+	{% block saler_js %}
+	<script type="text/javascript">
+		if (document.body.offsetWidth <= 1024) {
+			document.getElementsByClassName('sdasdasd')[1].style.display = 'none';
+			document.getElementsByClassName('sdasdasd')[0].className = 'col-md-12 p-0';
+		}
+		if (document.body.offsetWidth <= 800) {
+			document.getElementById('prods_view').style.display = "none";
+		}
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('.add_to_cart').click(function () {
+			var catid = this.id.toString();
+			$.ajax(
+				{
+					type: "GET",
+					url: "/seller/add_to_cart",
+					data: {
+						prod_id: catid
+					},
+					success: function (data) {
+						$('#cart_no').text(data);
+						document.getElementById('wallet').style.left = '40px';
+					}
+				})
+		});
+	</script>
+
+
+	{% endblock saler_js %}

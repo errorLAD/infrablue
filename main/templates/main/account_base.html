@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% block main_head %}
+{% load static %}
+<title>{{title}}</title>
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/signup.css' %}">
+{% endblock main_head %}
+{% block main_body %}
+<div class="container-fluid">
+    <div class="">
+     
+        <div class="">
+            <div class="box  widget-flat">
+                <div class="card-body">
+                    <div class="subtitle mb-2 pt-2" style="text-align: center;">
+                        {% if title %}
+                        <h2 class="tag is-success is-light is-medium" style="color: #080d2b; margin-top: -25px;">{{ title }}</h2>
+                        {% else %}
+                        <h3 class="tag is-link is-light is-medium" style="color: #080d2b; margin-top: -25px;"><b>LOGIN</b></h2>
+                        {% endif %}
+                    </div>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    {% block body_account %}
+                    {% endblock body_account %}
+                </div>
+         
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_body %}
+
+{% block main_script %}
+
+{% endblock main_script %}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>InfraBlue.in</title>
+	{% load static %}
+	{% load app_tags %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://imgur.com/Nyc99cc.png" rel="icon">
+   
+	<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	
+	<script>
+		tailwind.config = {
+		  theme: {
+			extend: {
+			  colors: {
+				clifford: '',
+			  }
+			}
+		  }
+		}
+	  </script>
+
+	<script type="application/x-javascript">
+		addEventListener("load", function() {
+			setTimeout(hideURLbar, 0);
+		}, false);
+		function hideURLbar(){
+			window.scrollTo(0,1);
+			 }
+			 function update_cart() {
+			 	if (localStorage.getItem('add_to_cart') == null) {
+					var add_to_cart = {};
+				}
+				else {
+					add_to_cart = JSON.parse(localStorage.getItem('add_to_cart'));
+					document.getElementById('cart_no').innerHTML = Object.keys(add_to_cart).length;
+
+				}
+			 	var prod_list_local = [];
+					if (localStorage.getItem('add_to_cart') != null) {
+						for (var prd_item in add_to_cart) {
+							prod_list_local.push(prd_item + "|" + add_to_cart[prd_item]);
+						}
+					}
+					$.ajax(
+						{
+							type: "GET",
+							url: "/dummy_cart",
+							data: {
+								prod_list: prod_list_local.toString()
+							},
+							success: function (data) {
+								console.log(data);
+							}
+						});
+					//{% if request.user.is_authenticated %}
+					localStorage.clear();
+				    //{% endif %}
+						 }
+		 </script>
+	<!--//tags -->
+	<link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'main/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'saler/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	{% block main_head %}
+	{% endblock main_head %}
+</head>
+
+<body>
+	<nav class="navbar w3-hide-small" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+		  <a class="navbar-item" href="{% url 'home' %}">
+			<img src="https://imgur.com/ndJlf0P.png" width="200" height="38">
+		  </a>
+	  
+		  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		  </a>
+		</div>
+	  
+		<div id="navbarBasicExample" class="navbar-menu">
+		  <div class="navbar-start">
+			<div class="buttons">
+	<a class="navbar-item button is-link is-light" onclick="document.getElementById('id01').style.display='block'">
+	 <span class="space-between" px="2"></span>   Categories
+	  </a>
+	<div id="id01" class="w3-modal">
+	  <div class="w3-modal-content">
+
+		  <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <div class="lg:text-center">
+		
+		   
+	 </div>
+		
+	 <div class="columns">
+		<div class="column">
+			<div style="overflow-y: scroll; height: 90%;" >
+				<ul>
+					{% for cat in category %}
+					<div class="buttons">
+					<li>
+						<a href="#list{{forloop.counter}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle px-4 bg-indigo-50 py-2">{{cat.name}}</a>
+						<ul class="collapse list-unstyled " id="list{{forloop.counter}}">
+							{% for item in cat.sub_Categories|split:","  %}
+							<li class="px-8">
+								<a href="/MenuFilter/{{cat}},{{item}}">{{item}}</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+					
+					</div>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="column">
+			<h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+				<span class="block">Categories</span>
+			
+			  </h2>
+			  <div class="py-24">
+			  <img src="https://imgur.com/xXtLMOo.png" width="400" height="138">
+		      </div>
+		</div>
+
+	  </div>
+		 
+	  </div>
+	</div>
+</div>
+		  </div>
+
+		  <div class="navbar-start">
+			<div class="navbar-item">
+				<div class="buttons">
+				<form class="form-inline my-2 my-lg-0 serch" action="/search">
+					<input class="form-control mr-sm-2 is-focused" type="search" placeholder="Search for Anything You Want"
+						aria-label="Search" name="query">
+					<button class="button is-primary is-light" type="submit" style="margin: 0;"><i class="fa fa-search"
+							aria-hidden="true"></i></button>
+				</form>
+				</div>
+			</div>
+		  </div>
+		  </div>
+		 
+		 
+		 
+		  <div class="navbar-end">
+			<div class="navbar-item">
+			  <div class="buttons">
+				<a href="{% url 'main_cart' %}" class="" style="font-size: 22px; color: rgb(10, 1, 1); margin-right: 20px;"><i
+					class="fa fa-shopping-cart" aria-hidden="true"></i><sup><span class="badge"
+						id="cart_no">{{cart_element_no}}</span></sup></a>
+						{% if request.user.is_authenticated %}
+						<a href="{% url 'account_settings' %}" class="button is-info is-light"  data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"
+						data-html="true"
+						><img
+							src="{{request.user.userdetail.photo.url}}"
+							style="height: 20px; width: 20px; border-radius: 10px; margin-right: 3px;"> <smaall></smaall>{{request.user.first_name}}</a>
+									 
+							<a href="{% url 'myorders' %}" class="button is-danger is-light">
+							<small>My Order</small>
+						   </a>
+				
+				<a href="{% url 'logout' %}" class="button is-danger">
+								Logout
+				</a>
+				{% else %}
+				<a href="{% url 'signup' %}" class="button is-light">
+				  <strong>Sign up</strong>
+				</a>
+				<a href="{% url 'login' %}"class="button is-light">
+				  Log in
+				</a>
+				<a href="{% url 'seller_signup' %}" class="button is-link">
+					Seller
+				  </a>
+				  {% endif %}
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </nav>
+
+
+<!--small screen-->
+<div class="w3-hide-large">
+	<div class="w3-top">
+		<div class="w3-bar w3-white w3-card w3-left-align w3-large">
+		  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu">
+			
+			<i class="fa fa-bars"></i></a>
+		
+							<a href="{% url 'main_cart' %}" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-right w3-large" style="font-size: 60px; color: rgb(0, 0, 0); margin-right: px;"><i
+					class="fa fa-shopping-cart" aria-hidden="true"></i><sup><span class="badge"
+						id="cart_no">{{cart_element_no}}</span></sup></a>
+
+
+
+
+		  <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-padding-large w3-white">
+			<img src="https://imgur.com/ndJlf0P.png" width="150" height="38">
+		</a>
+       
+		</div>
+	  
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large ">
+			<div class="bg-yellow-50">
+
+   {% if request.user.is_authenticated %}
+   <div href="##"  class="button is-info is-light px-36"  data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"
+   data-html="true"
+   data-content=""><img
+	   src="{{request.user.userdetail.photo.url}}"
+	   style="height: 25px; width: 25px; border-radius: 12px; margin-right: 4px;"><span class="text-dark-900"> {{request.user.first_name}}</span></div>
+  <br><br>
+  <span class="px-2 py-4">
+	   <a href='{% url 'myorders' %}'>
+		<button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+			My Order
+		  </button>
+	   </a>
+	</span><br>
+	<span class="px-2">
+	   <a href='{% url 'account_settings' %}'>	<button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+		Account Settings
+	  </button></a>
+	
+	</span>
+	 
+	 
+	 
+	 
+	 
+	   {% endif %}
+
+		
+		
+   <!--categories-->
+		<div class="w3-dropdown-hover">
+			<button class=" p-0.5 mb-2 mr-2 py px-2">
+				<span class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+					Categories
+				</span>
+			</button>
+	
+			  <div class="w3-dropdown-content w3-bar-block w3-border bg-indigo-50">
+				<ul class="py-1.5 px-2" >
+					{% for cat in category %}
+					<div class="buttons">
+					<li>
+						<a href="#list{{forloop.counter}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle button rounded-full is-black">{{cat.name}}</a>
+						<ul class="collapse list-unstyled" id="list{{forloop.counter}}">
+							{% for item in cat.sub_Categories|split:","  %}
+							<li class="px-12">
+								<a href="/MenuFilter/{{cat}},{{item}}" class="button is-blue px-4">{{item}}</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+					</div>
+					{% endfor %}
+				</ul>
+			  </div>
+			</div>
+	  <!---end categories-->
+
+	  {% if request.user.is_authenticated %}
+	     <div class="px-2">
+			<a href="{% url 'logout' %}">	
+				<button class="focus:outline-none text-white bg-red-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+					LogOut
+				  </button>
+				</a>
+			</div>
+
+				{% else %}
+				<br>
+				<span class="px-2">
+                <a href="{% url 'signup' %}" >
+				<button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+				  Sign Up
+			    </button>
+			   </span>
+			</a>
+		
+
+				<br>
+				<span class="px-2">
+				<a href="{% url 'login' %}">
+					<button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+						Log In
+					  </button>
+				</a>
+			   </span>
+				
+			   <br>
+			   <span class="px-2">
+				<a href="{% url 'seller_signup' %}">
+					<button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+						 Seller
+					  </button>
+				  </a>		
+				</span>
+
+				  {% endif %}
+		<br><br>
+		
+		</div>
+		</div>
+	  </div>
+   <br>
+   <div class="flex justify-center box py-4 bg-indigo-50">
+	   
+	<div class=" xl:w-96"><br>
+   <form class="form-inline my-2 my-lg-0 serch" action="/search">	
+	  <div class="input-group relative flex flex-wrap items-stretch">
+
+		<input type="search" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-900 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Search" aria-label="Search"  name="query" aria-describedby="button-addon3">
+		<button class="btn inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="submit" id="button-addon3">Search</button>
+
+	</div>
+	</form>
+	</div>
+  </div>
+
+</div>
+
+  
+  <dev class="" id="menu_close">
+	  {% block main_body %}
+	  {% endblock main_body %}
+  </div>
+  {% block main_script %}
+  {% endblock main_script %}
+
+	<!-- Add to cart -->
+	<script type="text/javascript">
+		if (localStorage.getItem('add_to_cart') == null) {
+			var add_to_cart = {};
+		}
+		else {
+			add_to_cart = JSON.parse(localStorage.getItem('add_to_cart'));
+		}
+	</script>
+	{% if not user.is_authenticated %}
+	<script type="text/javascript">
+		if (localStorage.getItem('add_to_cart') == null) {
+			var add_to_cart = {};
+		}
+		else {
+			add_to_cart = JSON.parse(localStorage.getItem('add_to_cart'));
+			document.getElementById('cart_no').innerHTML = Object.keys(add_to_cart).length;
+
+		}
+		$('.add_to_cart').click(function () {
+			var idstr = $(this).attr("prod_id");
+			console.log(idstr);
+			if (add_to_cart[idstr] != undefined) {
+				add_to_cart[idstr] = add_to_cart[idstr] + 1;
+			}
+			else {
+				add_to_cart[idstr] = 1;
+			}
+			localStorage.setItem('add_to_cart', JSON.stringify(add_to_cart));
+			document.getElementById('cart_no').innerHTML = Object.keys(add_to_cart).length;
+			update_cart();
+		});
+	</script>
+	{% endif %}
+
+	{% if request.user.is_authenticated %}
+	<script type="text/javascript">
+		$('.add_to_cart').click(function () {
+			var id = $(this).attr("prod_id");
+			var siz= this.innerText;
+			if(siz == "Add To Cart")
+				siz = "None"
+			var catid = ''+id+','+siz;
+			$.ajax(
+				{
+					type: "GET",
+					url: "/add_to_cart",
+					data: {
+						prod_id: catid
+					},
+					success: function (data) {
+						$('#cart_no').text(data);
+					}
+				})
+		});
+	</script>
+	{% endif %}
+	<!-- js for sending local data -->
+	<script type="text/javascript">
+		var prod_list_local = [];
+		if (localStorage.getItem('add_to_cart') != null) {
+			for (var prd_item in add_to_cart) {
+				prod_list_local.push(prd_item + "|" + add_to_cart[prd_item]);
+			}
+		}
+		$.ajax(
+			{
+				type: "GET",
+				url: "/dummy_cart",
+				data: {
+					prod_list: prod_list_local.toString()
+				},
+				success: function (data) {
+					console.log(data);
+				}
+			});
+		//{% if request.user.is_authenticated %}
+		localStorage.clear();
+	    //{% endif %}
+	</script>
+
+
+	<script>
+		$(document).ready(function () {
+			$('[data-toggle="popover"]').popover();
+		});
+	</script>
+<script>
+	// Used to toggle the menu on small screens when clicking on the menu button
+	function myFunction() {
+	  var x = document.getElementById("navDemo");
+	  if (x.className.indexOf("w3-show") == -1) {
+		x.className += " w3-show";
+	  } else { 
+		x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+	</script>
+	<script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

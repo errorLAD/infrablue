@@ -1,0 +1,300 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head style="font-family: economicaregular;">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link href="{% static 'main/images/favicon.png' %}" rel="icon">
+	<link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'saler/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+	<link href="{% static 'saler/css/style.css' %}" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+
+	<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<title>goInfra.in | seller Dashboard </title>
+
+	{% block saler_head %}
+	{% endblock saler_head %}
+</head>
+<div class="navbar w3-hide-small" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+
+		<a class="navbar-item" href="{% url 'home' %}">
+			<img src="https://imgur.com/ndJlf0P.png" width="150" height="38">
+		  </a>
+	  
+  
+	  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+		<span aria-hidden="true"></span>
+	  </a>
+	</div>
+  
+	<div id="navbarBasicExample" class="navbar-menu">
+	  <div class="navbar-start">
+		<a onclick="menuDisp()" onmouseenter="document.getElementById('wallet').style.left = '-400px';"
+		data-toggle="tooltip" data-placement="top" title="Menu"class="navbar-item">
+		  Menu
+		</a>
+  
+
+    	<a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'saler_home' %}"
+			data-toggle="tooltip" data-placement="top" title="Home" class="navbar-item">
+			Home
+		  </a>
+	
+
+		  <a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'dashboard' %}"
+		  data-toggle="tooltip" data-placement="top" title="Dashboard" class="navbar-item">
+		 Your Order
+		  </a>
+		  <a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'add_product' %}"
+		  data-toggle="tooltip" data-placement="top" title="Add Product" class="navbar-item">
+		  Add Product
+		</a>
+		<a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'view_products' %}"
+		data-toggle="tooltip" data-placement="top" title="View My Products" class="navbar-item">
+		Products in Your Store!
+		  </a>
+
+		
+
+	  </div>
+  
+	  <div class="navbar-end">
+		<div class="navbar-item">
+		  <div class="buttons">
+			<a
+			onmouseenter="document.getElementById('wallet').style.left = '40px';" data-toggle="tooltip"
+			data-placement="top" title="Wrappers" class="navbar-item"><img src="{% static 'main/images/wrapper_logo.png' %}"
+				style="width: 80%" class="mb-1"></a>
+				
+			<a href="##" data-container="body" data-toggle="popover" data-placement="right" data-trigger="focus"
+					data-html="true"
+					data-content="<a href='{% url 'saler_account_settings' %}'>Account Settings</a>" onmouseenter="document.getElementById('wallet').style.left = '-400px';" data-toggle="tooltip"
+			 title="User Profile" class="button is-primary">
+			  <strong>Profile</strong>
+			</a>
+			<a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'logout' %}"
+			data-toggle="tooltip" data-placement="top" title="Logout" class="button is-light">
+			  Log out
+			</a>
+		  </div>
+		  
+		</div>
+
+	  </div>
+	</div>
+</div>
+
+
+<div class="w3-hide-large">
+
+<!-- Navbar -->
+<div class="w3-top">
+	<div class="w3-bar w3- w3-card w3-left-align w3-large">
+	  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-black w3-large " href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+	  <div class="w3-bar-item w3-button w3-padding-large w3-white">
+		<a class="navbar-item" href="{% url 'home' %}">
+			<img src="https://imgur.com/ucz7QPm.png" width="150" height="38">
+		  </a>
+		</div>
+
+	</div>
+  
+	<!-- Navbar on small screens -->
+	<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large ">
+
+		<a onclick="menuDisp()" class="button is-link is-outlined" onmouseenter="document.getElementById('wallet').style.left = '-400px';"
+		data-toggle="tooltip" data-placement="top" title="Menu"class="navbar-item">
+		  Menu
+		</a>
+  
+
+    	<a onmouseenter="document.getElementById('wallet').style.left = '-400px';" class="button is-link is-outlined" href="{% url 'saler_home' %}"
+			data-toggle="tooltip" data-placement="top" title="Home" class="navbar-item">
+			Home
+		  </a>
+	
+
+		  <a onmouseenter="document.getElementById('wallet').style.left = '-400px';" class="button is-link is-outlined" href="{% url 'dashboard' %}"
+		  data-toggle="tooltip" data-placement="top" title="Dashboard" class="navbar-item">
+		 Your Order
+		  </a>
+		  <a onmouseenter="document.getElementById('wallet').style.left = '-400px';" class="button is-link is-outlined" href="{% url 'add_product' %}"
+		  data-toggle="tooltip" data-placement="top" title="Add Product" class="navbar-item ">
+		  Add Product
+		</a>
+		<div class="py-2"></div>
+		<a onmouseenter="document.getElementById('wallet').style.left = '-400px';" class="button is-link is-outlined" href="{% url 'view_products' %}"
+		data-toggle="tooltip" data-placement="top" title="View My Products" class="navbar-item">
+		Products in Your Store!
+		  </a>
+	
+			  
+		  <a href="##" data-container="body" data-toggle="popover" data-placement="right" data-trigger="focus"
+				  data-html="true"
+				  data-content="<a href='{% url 'saler_account_settings' %}'>Account Settings</a>" onmouseenter="document.getElementById('wallet').style.left = '-400px';" data-toggle="tooltip"
+		   title="User Profile" class="button is-primary">
+			<strong>Profile</strong>
+		  </a>
+		  <a onmouseenter="document.getElementById('wallet').style.left = '-400px';" href="{% url 'logout' %}"
+		  data-toggle="tooltip" data-placement="top" title="Logout" class="button is-light">
+			Log out
+		  </a>
+		  <div class="py-4"></div>
+	</div>
+  </div>
+
+<br><br>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<body style="background: #ffffff; font-family: 'Open Sans', sans-serif;">
+
+	<!-- menu -->
+	<nav id="menu" style="display: none; z-index: 98">
+		<ul>
+			<!--<li class="active">
+				 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Men's
+					Wear</a>
+				<ul class="collapse list-unstyled" id="homeSubmenu">
+					<li>
+						<a href="#">Lipistic</a>
+					</li>
+					<li>
+						<a href="#">Chappal</a>
+					</li>
+					<li>
+						<a href="#">Sandil</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Foodwear</a>
+			</li>
+			<li>
+				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Women's
+					Wear</a>
+				<ul class="collapse list-unstyled" id="pageSubmenu">
+					<li>
+						<a href="#">Lipistic</a>
+					</li>
+					<li>
+						<a href="#">Chappal</a>
+					</li>
+					<li>
+						<a href="#">Pata na ka</a>
+					</li>
+				</ul>
+			</li>-->
+			<li>
+				<a href="/contact">Contact Us</a>
+			</li> 
+			<li>
+				<a href="#">Terms & Conditions</a>
+			</li>
+		</ul>
+		<section style="bottom: 0; position: absolute; width: 100%; background-color: #231f20; color: #fff;">
+			<i class="fa fa-facebook-official" aria-hidden="true"></i>
+			<i class="fa fa-youtube-play" aria-hidden="true"></i>
+			<i class="fa fa-instagram" aria-hidden="true"></i>
+			<i class="fa fa-twitter-square" aria-hidden="true"></i>
+			<i class="fa fa-linkedin-square" aria-hidden="true"></i>
+			<i class="fa fa-rss-square" aria-hidden="true"></i>
+			| &copy; 2020
+		</section>
+	</nav>
+
+	<!-- wallet -->
+	<div align="center" style="align-items: center; margin: 0; padding: 0; display: inline;">
+		<ul class="wallet" id="wallet" style="z-index: 98;">
+			<li class="p-1">
+				<a href="{% url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"
+						style="display: block;"><sup style="font-size: 12px;"> (<span
+								id="cart_no">{{cart_element_no}}</span>)</sup></i>View Cart</a>
+			</li>
+			<li class="p-1">
+				<a href="{% url 'seller_orders' %}"><i class="fa fa-archive" aria-hidden="true" style="display: block;"></i>My Orders</a>
+			</li>
+			<!-- <li class="p-1">
+				<a href="#"><i class="fa fa-history" aria-hidden="true" style="display: block;"></i>History</a>
+			</li> -->
+		</ul>
+	</div>
+	<!-- user -->
+	<div class="usr_detail" style="display: none;">
+
+	</div>
+
+	<main id="main">
+		{% block saler_body %}
+		{% endblock saler_body %}
+	</main>
+	{% block saler_js %}
+	{% endblock saler_js %}
+	<script type="text/javascript" src="{% static 'saler/js/main.js' %}"></script>
+	<script type="text/javascript">
+		let path = '{{request.path}}';
+		let elms = document.getElementById('nav').children;
+		for (var i = elms.length - 1; i >= 0; i--) {
+			if (elms[i].pathname == path) {
+				elms[i].style.color = '#be2714'
+			}
+		}
+	</script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('[data-toggle="popover"]').popover();
+		});
+	</script>
+
+<script>
+	// Used to toggle the menu on small screens when clicking on the menu button
+	function myFunction() {
+	  var x = document.getElementById("navDemo");
+	  if (x.className.indexOf("w3-show") == -1) {
+		x.className += " w3-show";
+	  } else { 
+		x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+	</script>
+</body>
+
+</html>

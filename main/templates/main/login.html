@@ -1,0 +1,84 @@
+{% extends 'main/account_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body_account %}
+
+<div class="columns w3-hide-small">
+	<div class="column">
+        <h1 class="px-2 py-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-3xl">
+            <span class="block xl:inline">Welcome</span>
+            <span class="block text-indigo-600 xl:inline">Back</span>
+		</h1>
+		<form method="POST" class="signup_form mr-2 ml-2">
+			{% csrf_token %}
+			<fieldset>
+				{{form|crispy}}
+			</fieldset>
+		
+		
+			<section class="mt-4 mr-1 ml-1">
+				<button  class="button is-link" type="submit">Log In</button>
+				<small class="px-24 tag is-link is-light">Don't have an account? &nbsp;<a href="{% url 'signup' %}">Sign Up</a></small>
+				<small class="tag is-warning is-light">Forgotten <a href="{% url 'password_reset' %}">Password</a></small>
+		
+			</section>
+			<div class="subtitle pt-2 mt-1">
+		
+			</div>
+		</form>
+	</div>
+	<div class="column px-12">
+      
+				<img src="https://imgur.com/0pOKbRa.png" width="430" height="218">
+	</div>
+
+</div>
+
+<!--smallscreen -->
+
+
+<div class="columns w3-hide-large bg-yellow-50">
+	
+	<div class="column">
+        <h1 class="px-2 py-4 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-3xl">
+            <span class="block xl:inline">Welcome 
+            <span class="block text-indigo-600 xl:inline">Back</span></span>
+		</h1>
+		<form method="POST" class="signup_form mr-2 ml-2">
+			{% csrf_token %}
+			<fieldset>
+				{{form|crispy}}
+			</fieldset>
+		
+		
+			<section class="mt-4 mr-1 ml-1">
+				<button  class="button is-link" type="submit">Log In</button>
+				<small class="px-24 tag is-link is-light">Don't have an account? &nbsp;<a href="{% url 'signup' %}">Sign Up</a></small>
+				<small class="tag is-warning is-light">Forgotten <a href="{% url 'password_reset' %}">Password</a></small>
+		
+			</section>
+			<div class="subtitle pt-2 mt-1">
+		
+			</div>
+		</form>
+	</div>
+	<div class="column px-12">
+    
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	document.getElementsByTagName('label')[0].innerText = 'Email/Mobile No.';
+</script>
+{% endblock body_account %}
